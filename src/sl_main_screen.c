@@ -6,14 +6,16 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 21:14:39 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 03:57:36 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/16 04:32:02 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
 #include <MLX42/MLX42.h> //Too many to list;
+#include "so_long.h"
 #include <stdint.h>  //'int32_t';
 #include <limits.h>  //INT_MAX;
+#include <stdio.h>	 //perror();
+#include <stdlib.h>	 //perror();
 
 // mlx_loop_hook(sl->mlx, ft_randomize, sl->image);
 //read and parse and mlx loop
@@ -21,6 +23,7 @@
 	// return (0);
 	// if (sl->width < 800 || sl->height < 600)
 	// 	return (perror("ERROR: get bigger monitor\n"), EXIT_FAIL);
+/*
 int	main2(t_solong *sl)
 {
 	mlx_get_monitor_size(0, &(sl->width), &(sl->height));
@@ -46,6 +49,7 @@ int	main2(t_solong *sl)
 				sl_error(mlx_strerror(mlx_errno)));
 	return (0);
 }
+*/
 
 //TODO: paint bg, paint walls, paint player, paint exit;
 //
@@ -70,20 +74,20 @@ int	main(int argc, char *argv[])
 {
 	t_solong	sl;
 	char		buffer[SL_MAX_MAP_BYTES];
-	int			palette[15];
+	// int			palette[15];
 	xpm_t		*textures[SL_COUNT / 2];
 
 	if (argc < 2 || !*argv[1])
-		return (perror("ERROR: provide map(s)."), EXIT_FAILURE);
+		return (perror("ERROR: provide map(s)."), 1);
 	argv++;
 	argc--;
 	sl.maps = (t_slmap *)malloc((argc + 1) * sizeof(t_slmap));
 	if (!sl.maps)
-		return (perror("ERROR: malloc failure."), EXIT_FAILURE);
-	sl.maps[argc] = NULL;
-	if (sl_load_maps(argc, argv, buffer, sl.maps));
-		return (free(sl.maps), EXIT_FAILURE);
-	sl.palette = sl_setpalette(palette);
+		return (perror("ERROR: malloc failure."), 1);
+	(&sl.maps)[argc] = NULL;
+	if (sl_load_maps(argc, argv, buffer, sl.maps))
+		return (free(sl.maps), 1);
+	// sl.mapspalette = sl_setpalette(palette);
 	sl.textures = textures;
-	return (main2(&sl));
+	return (0);
 }

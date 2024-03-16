@@ -6,7 +6,7 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 21:34:38 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 03:46:00 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/16 04:37:07 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@
 #  define SL_READMODE O_RDWR
 # endif
 
-// //default palette enum :)
-// //AM = AMOUNT
-// typedef enum sl_palette
-// {
-// 	SL_WALL,
-// 	SL_WALL_AM,
-// 	SL_SPACE,
-// 	SL_SPACE_AM,
-// 	SL_COLLECT,
-// 	SL_COLLECT_AM,
-// 	SL_EXIT,
-// 	SL_EXIT_AM,
-// 	SL_START,
-// 	SL_START_AM,
-// 	SL_COUNT,
-// } t_palette;
+//default palette enum :)
+//AM = AMOUNT
+typedef enum sl_palette
+{
+	SL_WALL,
+	SL_WALL_AM,
+	SL_SPACE,
+	SL_SPACE_AM,
+	SL_COLLECT,
+	SL_COLLECT_AM,
+	SL_EXIT,
+	SL_EXIT_AM,
+	SL_START,
+	SL_START_AM,
+	SL_COUNT,
+} t_palette;
 
 //TODO: decide on enemies :)
 	// mlx_image_t	*enemy_img;
@@ -78,7 +78,7 @@ typedef struct s_solong
 	xpm_t		**textures;
 	mlx_t		*mlx;
 	mlx_image_t	*player_img;
-	t_slmap		**maps;
+	t_slmap		*maps;
 	// int			multiplier; //mlx_stretch_image
 	int			width;
 	int			height;
@@ -88,15 +88,18 @@ typedef struct s_solong
 
 //so_long utils//
 //from top to bottom:
+//	utils:
 int		sl_error(const char *msg);
 void	sl_free_maps(t_slmap *maps, int n);
-
-int		sl_load_maps(int argc, char **argv, char *buffer, t_slmap *maps);
-
 int		*sl_setpalette(int *palette);
-bool	sl_load_textures(char *str, size_t strlen, t_solong *sl);
-int		sl_render(t_solong *sl);
+bool	sl_load_textures(char *str, size_t strlen, t_solong *sl, t_slmap *map);
 
+//	map_load && map_validate entry functions.
+int		sl_load_maps(int argc, char **argv, char *buffer, t_slmap *maps);
+bool	sl_flood_check(t_slmap *map, char c);
+
+//TODO: render these parsed scheise into window: 
+int		sl_render(t_solong *sl, t_slmap *map);
 void	sl_player_hook(mlx_key_data_t keydata, void *param);
 
 //boring terminal color defines:

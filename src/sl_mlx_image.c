@@ -6,7 +6,7 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 00:10:38 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 03:37:04 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/16 04:14:20 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	sl_player_hook(mlx_key_data_t keydata, void *param)
 		sl->player_img->instances[0].x += 96;
 }
 
-int	sl_render(t_solong *sl, )
+int	sl_render(t_solong *sl, t_slmap *map)
 {
-	if (mlx_image_to_window(sl->mlx, sl->bg_img, 0, 0) == -1)
+	if (mlx_image_to_window(sl->mlx, map->bg_img, 0, 0) == -1)
 		return (false);
 	mlx_key_hook(sl->mlx, sl_player_hook, (void *)sl);
 	mlx_loop(sl->mlx);
 	mlx_terminate(sl->mlx);
-	ft_free((void **)sl->lines, sizeof(char *));
+	ft_free((void **)map->lines);
 	return (true);
 }

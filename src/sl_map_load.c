@@ -6,7 +6,7 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 02:53:12 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 03:15:12 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/16 04:37:22 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ static bool sl_validate_map(t_slmap *map)
 			return (false);
 		y++;
 	}
-	if (y < 3 || !sl_validate_map_ring(map, *map->palette)
-		|| !sl_flood_check(map->lines, map->palette[SL_START]))
+	if (y < 3 || !sl_validate_map_ring(map, *map->palette))
 		return (false);
 	map->height = y;
 	return (true);
@@ -101,9 +100,11 @@ static int	sl_load_maps2(char *buffer, t_slmap *maps, int i)
 	if (!maps[i].lines)
 		return (sl_free_maps(maps, i), \
 				sl_error("ft_split failed"));
-	if (!sl_validate_map(&maps[i]))
+	if (!sl_validate_map(&maps[i])
+		|| !sl_flood_check(&(maps[i]), maps[i].palette[SL_START]))
 		return (sl_free_maps(maps, i), \
 				sl_error("\nERROR: mapfailure: width/height/palette\n"));
+	
 	return (0);
 }
 

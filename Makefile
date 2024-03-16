@@ -16,7 +16,7 @@ $(LIBFT_A):
 	make -C $(LIBFT) all
 
 $(LIBMLX_A):
-#	git clone https://github.com/codam-coding-college/MLX42 --depth=1
+	git clone https://github.com/codam-coding-college/MLX42 --depth=1
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 %.o: %.c
@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJS)
-#	@rm -rf $(LIBMLX)
+	@rm -rf $(LIBMLX)
 #	@make -C $(LIBFT) clean
 
 fclean: clean
