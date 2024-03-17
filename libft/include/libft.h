@@ -6,7 +6,7 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 19:09:51 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 01:59:28 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:59:05 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_list
 
 //PDF ORDER:
 //part 1 - ctype.h, string.h, strings.h, stdlib.h:
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -81,6 +82,7 @@ void	*ft_calloc(size_t nmemb, size_t size); //malloc()
 char	*ft_strdup(const char *s); //malloc()
 
 //part 2 - 42fr functions:
+
 char	*ft_substr(char const *s, unsigned int start, size_t len); //malloc()
 char	*ft_strjoin(char const *s1, char const *s2); //malloc()
 char	*ft_strtrim(char const *s1, char const *set); //malloc()
@@ -94,6 +96,7 @@ void	ft_putendl_fd(char *s, int fd); //write()
 void	ft_putnbr_fd(int n, int fd); //write()
 
 //bonus linked list:
+
 t_list	*ft_lstnew(void *content); //malloc()
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -106,13 +109,18 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 			// ft_lstclear(), ft_lstnew(), ft_lstadd_back();
 
 //newly added:
+
+size_t	ft_len(void **ptr, size_t ptrsize);
+char	*ft_strstr(const char *big, const char *little);
 char	*ft_strrstr(const char *big, const char *little);
 void	ft_free(void **ptr);
+void	ft_mapchr(char **map, char c, size_t *x, size_t *y);
 
 //gnl:
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
+#  define BUFFER_SIZE 16
 # endif // BUFFER_SIZE
+
 char	*gnl_splitnl(char **prefix, int i, char *result);
 char	*get_next_line(int fd);
 char	*get_next_line_bon(int fd);

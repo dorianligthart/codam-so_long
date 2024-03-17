@@ -6,7 +6,7 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:32:12 by doligtha          #+#    #+#             */
-/*   Updated: 2023/11/07 19:44:17 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/17 03:49:29 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,18 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	while (s && n--)
-		((unsigned char *)s)[n] = '\0';
+	while (s && n && n--)
+		*((char *)s + n) = '\0';
 }
 
 // int main()
 // {
 // 	//string:
-// 	char *test;
-// 	int i = 0;
-// 	while (i <  200)
+// 	int test[200];
+// 	int i = -1;
+// 	while (++i < 200)
 // 	{
-// 		test = malloc(i + 1);
 // 		test[i] = '\0';
-// 		test = ft_bzero((void *)s, i);
-// 		printf("%d:\n%s\n", i, test);
-// 		free(test);
+// 		ft_bzero(test, i * sizeof(int));
 // 	}
 // }

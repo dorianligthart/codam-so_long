@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_mapchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 23:15:10 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 18:59:31 by doligtha         ###   ########.fr       */
+/*   Created: 2024/03/17 04:06:32 by doligtha          #+#    #+#             */
+/*   Updated: 2024/03/17 04:07:20 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
 
-//frees an array of pointers.
-void	ft_free(void **ptr)
+void	ft_mapchr(char **map, char c, size_t *x, size_t *y)
 {
-	size_t n;
-
-	n = 0;
-	while (*(ptr + n))
+	*x = 0;
+	*y = 0;
+	while (map[*y])
 	{
-		free(*(ptr + n));
-		n++;
+		while (map[*y][*x])
+		{
+			if (map[*y][*x] == c)
+				break ;
+			x++;
+		}
+		y++;
 	}
 }

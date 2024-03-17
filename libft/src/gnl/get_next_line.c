@@ -6,12 +6,11 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 22:31:52 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/15 23:16:50 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/17 05:01:03 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // //debug needed by main():
-// #define BUFFER_SIZE 3
 // #include <fcntl.h> //open()
 // #include <stdio.h> //printf()
 
@@ -19,13 +18,12 @@
 #include <stdlib.h> 	//malloc(), free()
 #include <unistd.h>		//read(), main()->close()
 
-char	*splitnl(char **prefix, int i, char *result)
+char	*splitnl(char **prefix, int i, int suffix_len)
 {
-	int		suffix_len;
+	char	*result;
 	char	*tmp;
 
 	tmp = NULL;
-	suffix_len = 0;
 	while (*prefix && (*prefix)[i + suffix_len])
 		suffix_len++;
 	if (suffix_len)
@@ -61,7 +59,7 @@ char	*get_next_line(int fd)
 	strlen = 0;
 	while (prefix && prefix[strlen])
 		if (prefix[strlen++] == '\n')
-			return (splitnl(&prefix, strlen, NULL));
+			return (splitnl(&prefix, strlen, 0));
 	tmp = malloc(strlen + BUFFER_SIZE + 1);
 	if (!tmp)
 		return (free(prefix), prefix = NULL, NULL);
@@ -89,7 +87,7 @@ char	*get_next_line(int fd)
 //	read_return < 0 && pre;		error: 		pre=NULL, free(pre + tmp),	NULL;
 //	read_return < 0 && !pre;	error: 		pre=NULL, free(tmp), 		NULL;
 //	read_return == 0 && pre;	EOF: 		pre=NULL, free(pre), 		tmp;
-//	read_return == 0 && !pre;	past EOF: 	pre=NULL, free(tmp),		NULL;
+//	read_return == 0 && !pre;	EOF:	 	pre=NULL, free(tmp),		NULL;
 ////////////////////////////////////////////////////////////////////////////////
 
 // void	*ft_malloc(size_t size)
@@ -102,24 +100,22 @@ char	*get_next_line(int fd)
 // 	return (malloc(size));
 // }
 
-// int main(void)
+// int main(int argc, char *argv[])
 // {
-// 	int		fd = open("test.txt", O_RDONLY);
+// 	int		fd = open(argv[1], O_RDONLY);
 // 	// int		fd = 3;
 // 	// int		fd = 1;
 // 	if (fd < 0)
 // 		return (1);
 // 	char	*hold = NULL;
 
-// 	int i = 0
-// 	hold = get_next_line(fd);
-// 	while (hold || i < 10000)
+// 	do
 // 	{
-// 		printf("%s", hold);
-// 		free(hold);
 // 	 	hold = get_next_line(fd);
-// 		i++;
-// 	}
+// 		if (hold)
+// 			printf("%s", hold);
+// 		free(hold);
+// 	} while (hold);
 // 	close(fd);
 // 	return (0);
 // }

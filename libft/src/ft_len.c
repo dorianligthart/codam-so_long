@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_map_validate.c                                  :+:      :+:    :+:   */
+/*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 13:28:06 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/16 04:37:02 by doligtha         ###   ########.fr       */
+/*   Created: 2024/03/17 04:53:47 by doligtha          #+#    #+#             */
+/*   Updated: 2024/03/17 04:57:36 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include "so_long.h"
+#include <stddef.h>
 
-bool	sl_flood_check(t_slmap *map, char c)
+size_t	ft_len(void **ptr, size_t ptrsize)
 {
-	int	x;
-	int	y;
+	size_t	ret;
 
-	x = 0;
-	y = 0;
-	while (y < map->height)
-		while (x < map->width)
-			if (map->lines[y][x] == c)
-				break ;
-	printf("Breaked on index [%d][%d]\n", y, x);
-	return (true);
+	ret = 0;
+	while (ptr + ret)
+		ret += ptrsize;
+	return (ret);
 }

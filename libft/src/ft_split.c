@@ -6,11 +6,9 @@
 /*   By: doligtha <doligtha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 23:03:56 by doligtha          #+#    #+#             */
-/*   Updated: 2024/03/14 17:31:08 by doligtha         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:04:51 by doligtha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define DEBUG 1
 
 #ifdef DEBUG
 # include "libft.h"
@@ -21,11 +19,12 @@
 #endif
 
 #include <stdlib.h>
+#include <unistd.h>
 
-static char	**banana(const char *s, char c, int w, int words)
+static char	**banana(const char *s, char c, ssize_t w, ssize_t words)
 {
 	char	**s2;
-	int		i;
+	ssize_t		i;
 
 	i = 0;
 	while (s && s[i])
